@@ -1,0 +1,1 @@
+sap.ui.define(["sap/m/MessageToast"],function(t){"use strict";return{exit1_method:function(e){t.show("Custom exit button invoked by pp.");window.open("https://support.wwf.org.uk/earth_hour/index.php?type=individual","_blank")}}});

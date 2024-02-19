@@ -1,0 +1,181 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "college",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.12.3",
+            "toolsId": "91fa0797-9fdf-4d48-abf6-b2f61dea3a0c"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "odata/v4/my/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "dependencies": {
+            "minUI5Version": "1.120.7",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {},
+                "sap.f": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "college.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "collegeList",
+                    "target": "collegeList"
+                },
+                {
+                    "pattern": "college({key}):?query:",
+                    "name": "collegeObjectPage",
+                    "target": "collegeObjectPage"
+                }
+            ],
+            "targets": {
+                "collegeList": {
+                    "type": "Component",
+                    "id": "collegeList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "contextPath": "/college",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "college": {
+                                    "detail": {
+                                        "route": "collegeObjectPage"
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled",
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "actions": {
+                                        "1": {
+                                            "press": "college.ext.controller.Handler1.exit1_method",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "requiresSelection": false,
+                                            "text": "EXIT"
+                                        },
+                                        "2": {
+                                            "press": "college.ext.controller.HandlerNext.NextMethod",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "requiresSelection": false,
+                                            "text": "NEXT",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "1"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "collegeObjectPage": {
+                    "type": "Component",
+                    "id": "collegeObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "contextPath": "/college",
+                            "content": {
+                                "footer": {
+                                    "actions": {
+                                        "3": {
+                                            "press": "college.ext.controller.HandlerFooter.FooterMethod",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "FOOTER",
+                                            "position": {
+                                                "placement": "After"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "navigation": {}
+                        }
+                    }
+                }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {}
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}
